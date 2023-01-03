@@ -1,7 +1,3 @@
-terraform {
-  experiments = [ module_variable_optional_attrs ]
-}
-
 resource "google_project_service_identity" "cloudbuild" {
   provider = google-beta
 
