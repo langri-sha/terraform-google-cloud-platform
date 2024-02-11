@@ -9,3 +9,8 @@ variable "name" {
   default     = null
   type        = string
 }
+
+variable "project" {
+  type        = string
+  description = "The project ID where resources are created."
+}
