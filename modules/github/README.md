@@ -11,6 +11,7 @@ module "github" {
   source = "git@github.com:langri-sha/terraform-google-cloud-platform\.git//modules/github"
 
   full_name = "langri-sha/langri-sha.com"
+  project   = var.project
 }
 ```
 
