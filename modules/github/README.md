@@ -12,6 +12,10 @@ module "github" {
 
   full_name = "langri-sha/langri-sha.com"
   project   = var.project
+
+  actions_variables = {
+    some_property = "serializiable"
+  }
 }
 ```
 
