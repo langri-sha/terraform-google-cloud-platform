@@ -20,6 +20,17 @@ resource "github_actions_variable" "default" {
   variable_name    = each.key
 }
 
+resource "github_actions_secret" "secret" {
+  for_each = {
+    for name, secret in try(nonsensitive(var.actions_secrets), {}) :
+    name => sensitive(secret)
+  }
+
+  repository      = data.github_repository.default.name
+  secret_name     = each.key
+  plaintext_value = each.value
+}
+
 resource "google_service_account" "github_actions" {
   account_id   = local.id
   display_name = "GitHub Actions (${data.github_repository.default.full_name})"

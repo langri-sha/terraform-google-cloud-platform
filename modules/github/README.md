@@ -16,6 +16,10 @@ module "github" {
   actions_variables = {
     some_property = "serializiable"
   }
+
+  actions_secrets = {
+    SUPER = "secret"
+  }
 }
 ```
 
