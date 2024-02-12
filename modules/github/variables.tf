@@ -1,3 +1,8 @@
+variable "actions_variables" {
+  default     = {}
+  description = "Repository environment variables to set for GitHub Actions."
+}
+
 variable "full_name" {
   description = "Full name of the repository (in `org/name` format)."
   default     = null
