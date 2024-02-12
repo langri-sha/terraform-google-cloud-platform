@@ -20,6 +20,12 @@ module "github" {
   actions_secrets = {
     SUPER = "secret"
   }
+
+  deploy_key = {
+    "my-org/other-repo" = {
+      read_only: true
+    }
+  }
 }
 ```
 
