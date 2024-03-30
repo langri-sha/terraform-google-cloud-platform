@@ -1,8 +1,8 @@
 # GitHub
 
 Configures a GitHub repository with resources that are controlled by automation,
-mostly for [enabling keyless authentication] and configuring the [GitHub Actions]
-environment.
+mostly for [enabling keyless authentication], configuring the [GitHub Actions]
+environment, and setting sensible repository defaults.
 
 ## Usage
 
@@ -12,6 +12,11 @@ module "github" {
 
   full_name = "langri-sha/langri-sha.com"
   project   = var.project
+
+  actions_environments = [
+    "preview",
+    "production",
+  ]
 
   actions_variables = {
     some_property = "serializiable"

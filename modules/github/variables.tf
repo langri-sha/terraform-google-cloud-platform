@@ -1,3 +1,9 @@
+variable "actions_environments" {
+  type        = list(string)
+  default     = []
+  description = "Environments to configure for the repository."
+}
+
 variable "actions_variables" {
   default     = {}
   description = "Repository environment variables to set for GitHub Actions."
