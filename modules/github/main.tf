@@ -15,9 +15,9 @@ data "github_repository" "default" {
 resource "github_actions_variable" "default" {
   for_each = local.actions_variables
 
-  repository       = data.github_repository.default.name
-  value            = each.value
-  variable_name    = each.key
+  repository    = data.github_repository.default.name
+  value         = each.value
+  variable_name = each.key
 }
 
 resource "github_actions_secret" "secret" {
