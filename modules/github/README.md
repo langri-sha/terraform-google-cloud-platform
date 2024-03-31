@@ -13,10 +13,12 @@ module "github" {
   full_name = "langri-sha/langri-sha.com"
   project   = var.project
 
-  actions_environments = [
-    "preview",
-    "production",
-  ]
+  actions_environments = {
+    preview    = null
+    production = {
+      can_admins_bypass = false
+    }
+  }
 
   actions_variables = {
     some_property = "serializiable"

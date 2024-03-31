@@ -1,6 +1,20 @@
 variable "actions_environments" {
-  type        = list(string)
-  default     = []
+  type = map(object({
+    can_admins_bypass   = optional(bool)
+    prevent_self_review = optional(bool)
+    wait_timer          = optional(number)
+
+    deployment_branch_policy = optional(object({
+      protected_branches     = bool
+      custom_branch_policies = bool
+    }))
+
+    reviewers = optional(object({
+      teams = optional(list(string))
+      users = optional(list(string))
+    }))
+  }))
+  default     = {}
   description = "Environments to configure for the repository."
 }
 

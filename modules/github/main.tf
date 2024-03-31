@@ -12,6 +12,31 @@ data "github_repository" "default" {
   full_name = var.full_name
 }
 
+resource "github_repository_environment" "default" {
+  for_each = var.actions_environments
+
+  environment = each.key
+  repository  = github_repository.default.name
+
+  can_admins_bypass   = try(each.value.can_admins_bypass, null)
+  prevent_self_review = try(each.value.prevent_self_review, null)
+  wait_timer          = try(each.value.wait_timer, null)
+
+  dynamic "deployment_branch_policy" {
+    for_each = each.value.deployment_branch_policy != null ? [each.value.deployment_branch_policy] : []
+
+    content {
+      protected_branches     = deployment_branch_policy.value.protected_branches
+      custom_branch_policies = deployment_branch_policy.value.custom_branch_policies
+    }
+  }
+
+  reviewers {
+    teams = try(each.value.reviewers.teams, null)
+    users = try(each.value.reviewers.users, null)
+  }
+}
+
 resource "github_actions_variable" "default" {
   for_each = local.actions_variables
 
