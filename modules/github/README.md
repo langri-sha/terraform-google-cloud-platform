@@ -20,6 +20,15 @@ module "github" {
     }
   }
 
+  actions_environment_variables = {
+    preview = {
+      ASSETS_URL = "http://preview.acme.com/assets"
+    }
+    production = {
+      ASSETS_URL = "http://acme.com/assets"
+    }
+  }
+
   actions_variables = {
     some_property = "serializiable"
   }

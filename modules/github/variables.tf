@@ -18,6 +18,12 @@ variable "actions_environments" {
   description = "Environments to configure for the repository."
 }
 
+variable "actions_environment_variables" {
+  type        = map(map(string))
+  default     = {}
+  description = "Variables to configure for each environment."
+}
+
 variable "actions_variables" {
   default     = {}
   description = "Repository environment variables to set for GitHub Actions."

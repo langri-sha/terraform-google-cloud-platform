@@ -5,6 +5,18 @@ locals {
     service_account            = google_service_account.github_actions.email
     workload_identity_provider = module.github_actions_workload_identity_federation.provider_name,
   })
+
+  environments_variables = {
+    for each in flatten([
+      for environment, vars in local.environment_variables : [
+        for variable_name, value in vars : {
+          environment   = environment
+          variable_name = variable_name
+          value         = value
+        }
+      ]
+    ]) : "${each.environment}_${each.variable_name}" => each
+  }
 }
 
 data "github_repository" "default" {
@@ -35,6 +47,14 @@ resource "github_repository_environment" "default" {
     teams = try(each.value.reviewers.teams, null)
     users = try(each.value.reviewers.users, null)
   }
+}
+
+resource "github_actions_environment_variable" "default" {
+  for_each = local.environments_variables
+
+  environment   = each.value.environment
+  value         = each.value.value
+  variable_name = each.value.variable_name
 }
 
 resource "github_actions_variable" "default" {
