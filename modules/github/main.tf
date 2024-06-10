@@ -5,11 +5,64 @@ locals {
     service_account            = google_service_account.github_actions.email
     workload_identity_provider = module.github_actions_workload_identity_federation.provider_name,
   })
+
+  environment_secrets = flatten([
+    for environment, data in var.environments : [
+      for secret_name, plaintext_value in try(nonsensitive(data.actions_secrets), {}) : {
+        environment     = environment
+        secret_name     = secret_name
+        plaintext_value = plaintext_value
+      }
+    ]
+  ])
+
+  environment_variables = flatten([
+    for environment, data in var.environments : [
+      for variable_name, value in try(data.actions_variables, {}) : {
+        environment   = environment
+        value         = value
+        variable_name = variable_name
+      }
+    ]
+  ])
 }
 
 data "github_repository" "default" {
   name      = var.name
   full_name = var.full_name
+}
+
+resource "github_repository_environment" "default" {
+  for_each = var.environments
+
+  environment = each.key
+  repository  = data.github_repository.default.name
+}
+
+resource "github_actions_environment_secret" "default" {
+  for_each = {
+    for secret in local.environment_secrets :
+    "${secret.environment}_${secret.secret_name}" => secret
+  }
+
+  repository = data.github_repository.default.name
+
+  environment     = each.value.environment
+  plaintext_value = each.value.plaintext_value
+  secret_name     = each.value.secret_name
+}
+
+resource "github_actions_environment_variable" "default" {
+  for_each = {
+    for variable in local.environment_variables :
+    "${variable.environment}_${variable.variable_name}" => variable
+  }
+
+  repository = data.github_repository.default.name
+
+  environment   = each.value.environment
+  value         = each.value.value
+  variable_name = each.value.variable_name
 }
 
 resource "github_actions_variable" "default" {

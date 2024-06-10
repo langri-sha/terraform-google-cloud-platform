@@ -16,6 +16,15 @@ variable "deploy_key" {
   description = "Map of GitHub repositories to add a deploy key to."
 }
 
+variable "environments" {
+  type = map(object({
+    actions_secrets   = optional(map(string), {})
+    actions_variables = optional(map(string), {})
+  }))
+  default     = {}
+  description = "Map of Github Actions environments, with their variables and secrets."
+}
+
 variable "full_name" {
   description = "Full name of the repository (in `org/name` format)."
   default     = null
