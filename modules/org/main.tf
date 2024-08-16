@@ -9,7 +9,7 @@ data "google_organization" "org" {
 
 module "project_org" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 15.0.0"
+  version = "~> 16.0.0"
 
   name = "organization"
 
