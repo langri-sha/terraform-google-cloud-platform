@@ -19,7 +19,7 @@ resource "google_cloudbuild_trigger" "triggers" {
   included_files = each.value.included_files
 
   github {
-    name = var.repo_name
+    name  = var.repo_name
     owner = var.repo_owner
 
     dynamic "pull_request" {

@@ -15,7 +15,7 @@ variable "project_id" {
 
 variable "mx_records" {
   description = "MX record destinations and their priorities."
-  type = map(number)
+  type        = map(number)
 }
 
 variable "site_verifications" {

@@ -18,7 +18,7 @@ output "domain" {
   value       = data.google_organization.org.domain
 }
 
-output "location"{
+output "location" {
   description = "Default location to use for Google Cloud services."
   value       = var.location
 }

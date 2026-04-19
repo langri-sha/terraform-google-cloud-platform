@@ -24,7 +24,7 @@ module "project_org" {
 
 data "google_billing_account" "default" {
   billing_account = var.billing_account
-  open = true
+  open            = true
 
   depends_on = [
     google_organization_iam_binding.billing_creator
