@@ -47,20 +47,20 @@ output "my_api_token" {
 
 ## Inputs
 
-| Name | Type | Description | Default | Required |
-|------|------|-------------|---------|:--------:|
-| project | string | The project ID where secret resources are centralized. | n/a | yes |
-| secrets | list(string) | Descriptive names of secrets to create. | n/a | yes |
-| topic | string | Some descriptive text that will be added to the labels for this set of secrets in the project, e.g. 'cloudbuild'. | n/a | yes |
-| secret_accessors | list(string) | Service accounts given permission to read secrets. | `[]` | no |
-| read_secret_version | map(string) | Map of secrets and the version for which secret data is to be retrieved. For secret data to be read and used in TF configurations. | `{}` | no |
-| write_secret_data | map(string) | Map of secrets and their plaintext data to write as new secret versions. Keys must match entries in `secrets`. | `{}` | no |
-| write_secret_data_base64 | map(string) | Map of secrets and their base64-encoded data to write as new secret versions. Use for binary data like certificates or keys. | `{}` | no |
-| deletion_policy | string | What Terraform does to the prior secret version when it is replaced (e.g. on rotation) or destroyed. One of: `DISABLE`, `DELETE`, `ABANDON`. | `"DISABLE"` | no |
+| Name                     | Type         | Description                                                                                                                                  | Default     | Required |
+| ------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | :------: |
+| project                  | string       | The project ID where secret resources are centralized.                                                                                       | n/a         |   yes    |
+| secrets                  | list(string) | Descriptive names of secrets to create.                                                                                                      | n/a         |   yes    |
+| topic                    | string       | Some descriptive text that will be added to the labels for this set of secrets in the project, e.g. 'cloudbuild'.                            | n/a         |   yes    |
+| secret_accessors         | list(string) | Service accounts given permission to read secrets.                                                                                           | `[]`        |    no    |
+| read_secret_version      | map(string)  | Map of secrets and the version for which secret data is to be retrieved. For secret data to be read and used in TF configurations.           | `{}`        |    no    |
+| write_secret_data        | map(string)  | Map of secrets and their plaintext data to write as new secret versions. Keys must match entries in `secrets`.                               | `{}`        |    no    |
+| write_secret_data_base64 | map(string)  | Map of secrets and their base64-encoded data to write as new secret versions. Use for binary data like certificates or keys.                 | `{}`        |    no    |
+| deletion_policy          | string       | What Terraform does to the prior secret version when it is replaced (e.g. on rotation) or destroyed. One of: `DISABLE`, `DELETE`, `ABANDON`. | `"DISABLE"` |    no    |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| secret_data | Secret plaintexts. |
+| Name         | Description                                     |
+| ------------ | ----------------------------------------------- |
+| secret_data  | Secret plaintexts.                              |
 | secret_names | Secret names mapped to their full resource IDs. |
