@@ -26,3 +26,11 @@ resource "google_secret_manager_secret_iam_member" "secret_accessors" {
   role      = "roles/secretmanager.secretAccessor"
   secret_id = google_secret_manager_secret.secret[each.value.secret].id
 }
+
+data "google_secret_manager_secret_version" "secret_data" {
+  for_each = var.read_secret_version
+
+  project = google_secret_manager_secret.secret[each.key].project
+  secret  = google_secret_manager_secret.secret[each.key].id
+  version = each.value
+}

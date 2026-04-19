@@ -18,3 +18,9 @@ variable "topic" {
   type        = string
   description = "Some descriptive text that will be added to the labels for this set of secrets in the project, e.g. 'cloudbuild'."
 }
+
+variable "read_secret_version" {
+  type        = map(string)
+  default     = {}
+  description = "Map of secrets and the version for which secret data is to be retrieved. For secret data to be read and used in TF configurations."
+}
