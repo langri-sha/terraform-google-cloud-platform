@@ -28,22 +28,22 @@ resource "google_secret_manager_secret_iam_member" "secret_accessors" {
 }
 
 resource "google_secret_manager_secret_version" "secret_data" {
-  for_each = {
-    for k, v in var.write_secret_data : k => v if v != ""
-  }
+  for_each = toset(nonsensitive([
+    for k, v in var.write_secret_data : k if v != ""
+  ]))
 
   secret          = google_secret_manager_secret.secret[each.key].id
-  secret_data     = each.value
+  secret_data     = var.write_secret_data[each.key]
   deletion_policy = var.deletion_policy
 }
 
 resource "google_secret_manager_secret_version" "secret_data_base64" {
-  for_each = {
-    for k, v in var.write_secret_data_base64 : k => v if v != ""
-  }
+  for_each = toset(nonsensitive([
+    for k, v in var.write_secret_data_base64 : k if v != ""
+  ]))
 
   secret                = google_secret_manager_secret.secret[each.key].id
-  secret_data           = each.value
+  secret_data           = var.write_secret_data_base64[each.key]
   is_secret_data_base64 = true
   deletion_policy       = var.deletion_policy
 }
