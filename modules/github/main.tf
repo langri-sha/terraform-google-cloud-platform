@@ -90,6 +90,14 @@ resource "google_service_account" "github_actions" {
   project      = var.project
 }
 
+resource "google_service_account_iam_member" "github_actions_token_creator" {
+  count = var.enable_token_creator ? 1 : 0
+
+  service_account_id = google_service_account.github_actions.id
+  role               = "roles/iam.serviceAccountTokenCreator"
+  member             = "serviceAccount:${google_service_account.github_actions.email}"
+}
+
 resource "random_id" "pool_id" {
   byte_length = 8
 }

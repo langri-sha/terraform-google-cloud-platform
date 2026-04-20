@@ -25,6 +25,12 @@ variable "attribute_mapping" {
   description = "Claim mapping from the GitHub OIDC token to Google Workload Identity attributes. Override to surface additional claims (e.g., `attribute.environment`, `attribute.ref`, `attribute.job_workflow_ref`) for use in IAM conditions."
 }
 
+variable "enable_token_creator" {
+  type        = bool
+  default     = false
+  description = "Grants the GitHub Actions service account `roles/iam.serviceAccountTokenCreator` on itself, allowing workflows to mint short-lived OAuth access tokens or ID tokens via `iam.generateAccessToken` / `iam.generateIdToken` after federating."
+}
+
 variable "deploy_key" {
   type = map(object({
     read_only = bool
