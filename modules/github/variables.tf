@@ -8,6 +8,12 @@ variable "actions_secrets" {
   description = "Repository environment secrets to set for GitHub Actions."
 }
 
+variable "attribute_condition" {
+  type        = string
+  default     = null
+  description = "CEL expression that restricts which tokens can authenticate against the Workload Identity Pool provider (e.g., `assertion.repository_owner == 'my-org'`). When null, all tokens from the GitHub OIDC issuer are accepted and access is gated solely by the service account IAM bindings."
+}
+
 variable "deploy_key" {
   type = map(object({
     read_only = bool
