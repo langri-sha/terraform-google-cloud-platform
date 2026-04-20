@@ -14,6 +14,17 @@ variable "attribute_condition" {
   description = "CEL expression that restricts which tokens can authenticate against the Workload Identity Pool provider (e.g., `assertion.repository_owner == 'my-org'`). When null, all tokens from the GitHub OIDC issuer are accepted and access is gated solely by the service account IAM bindings."
 }
 
+variable "attribute_mapping" {
+  type = map(string)
+  default = {
+    "google.subject"       = "assertion.sub"
+    "attribute.actor"      = "assertion.actor"
+    "attribute.aud"        = "assertion.aud"
+    "attribute.repository" = "assertion.repository"
+  }
+  description = "Claim mapping from the GitHub OIDC token to Google Workload Identity attributes. Override to surface additional claims (e.g., `attribute.environment`, `attribute.ref`, `attribute.job_workflow_ref`) for use in IAM conditions."
+}
+
 variable "deploy_key" {
   type = map(object({
     read_only = bool

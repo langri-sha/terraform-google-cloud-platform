@@ -102,6 +102,7 @@ module "github_actions_workload_identity_federation" {
   pool_id             = "github-actions-${random_id.pool_id.hex}"
   provider_id         = "github-provider-${random_id.pool_id.hex}"
   attribute_condition = var.attribute_condition
+  attribute_mapping   = var.attribute_mapping
   sa_mapping = {
     "github-actions" = {
       sa_name   = google_service_account.github_actions.id
