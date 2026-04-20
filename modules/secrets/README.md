@@ -14,12 +14,17 @@ For secrets that are to be used later in the Terraform configuration, a map of
 requested secret versions can be optionally supplied to have their secret data
 assigned to the output.
 
+To populate secrets with values managed by Terraform (for example, outputs from
+another resource), supply `write_secret_data`. Use `write_secret_data_base64`
+for binary payloads. Keys in either map must match entries in `secrets`.
+
 ```hcl
 module "my_secrets" {
   source = "../modules/secrets"
 
   project = var.project_id
   topic   = "cloudbuild"
+  secrets = ["my-api-token", "my-ssh-key", "db-password"]
 
   secret_accessors = [
     "serviceAccount:my-service-account@my-project.iam.gserviceaccount.com"
@@ -28,6 +33,10 @@ module "my_secrets" {
   read_secret_version = {
     my-api-token = "latest"
     my-ssh-key   = "1"
+  }
+
+  write_secret_data = {
+    db-password = random_password.db.result
   }
 }
 
@@ -45,6 +54,9 @@ output "my_api_token" {
 | topic | string | Some descriptive text that will be added to the labels for this set of secrets in the project, e.g. 'cloudbuild'. | n/a | yes |
 | secret_accessors | list(string) | Service accounts given permission to read secrets. | `[]` | no |
 | read_secret_version | map(string) | Map of secrets and the version for which secret data is to be retrieved. For secret data to be read and used in TF configurations. | `{}` | no |
+| write_secret_data | map(string) | Map of secrets and their plaintext data to write as new secret versions. Keys must match entries in `secrets`. | `{}` | no |
+| write_secret_data_base64 | map(string) | Map of secrets and their base64-encoded data to write as new secret versions. Use for binary data like certificates or keys. | `{}` | no |
+| deletion_policy | string | What Terraform does to the prior secret version when it is replaced (e.g. on rotation) or destroyed. One of: `DISABLE`, `DELETE`, `ABANDON`. | `"DISABLE"` | no |
 
 ## Outputs
 
