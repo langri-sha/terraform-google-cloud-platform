@@ -12,3 +12,8 @@ output "workload_identity_provider" {
   value       = module.github_actions_workload_identity_federation.provider_name
   description = "GitHub Actions workload identity provider."
 }
+
+output "workload_identity_pool_name" {
+  value       = module.github_actions_workload_identity_federation.pool_name
+  description = "Full resource name of the Workload Identity Pool backing GitHub Actions authentication."
+}

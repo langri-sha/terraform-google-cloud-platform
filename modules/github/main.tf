@@ -90,6 +90,14 @@ resource "google_service_account" "github_actions" {
   project      = var.project
 }
 
+resource "google_service_account_iam_member" "github_actions_token_creator" {
+  count = var.enable_token_creator ? 1 : 0
+
+  service_account_id = google_service_account.github_actions.id
+  role               = "roles/iam.serviceAccountTokenCreator"
+  member             = "serviceAccount:${google_service_account.github_actions.email}"
+}
+
 resource "random_id" "pool_id" {
   byte_length = 8
 }
@@ -98,9 +106,11 @@ module "github_actions_workload_identity_federation" {
   source  = "terraform-google-modules/github-actions-runners/google//modules/gh-oidc"
   version = ">= 3.1.0"
 
-  project_id  = var.project
-  pool_id     = "github-actions-${random_id.pool_id.hex}"
-  provider_id = "github-provider-${random_id.pool_id.hex}"
+  project_id          = var.project
+  pool_id             = "github-actions-${random_id.pool_id.hex}"
+  provider_id         = "github-provider-${random_id.pool_id.hex}"
+  attribute_condition = var.attribute_condition
+  attribute_mapping   = var.attribute_mapping
   sa_mapping = {
     "github-actions" = {
       sa_name   = google_service_account.github_actions.id

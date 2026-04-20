@@ -8,6 +8,29 @@ variable "actions_secrets" {
   description = "Repository environment secrets to set for GitHub Actions."
 }
 
+variable "attribute_condition" {
+  type        = string
+  default     = null
+  description = "CEL expression that restricts which tokens can authenticate against the Workload Identity Pool provider (e.g., `assertion.repository_owner == 'my-org'`). When null, all tokens from the GitHub OIDC issuer are accepted and access is gated solely by the service account IAM bindings."
+}
+
+variable "attribute_mapping" {
+  type = map(string)
+  default = {
+    "google.subject"       = "assertion.sub"
+    "attribute.actor"      = "assertion.actor"
+    "attribute.aud"        = "assertion.aud"
+    "attribute.repository" = "assertion.repository"
+  }
+  description = "Claim mapping from the GitHub OIDC token to Google Workload Identity attributes. Override to surface additional claims (e.g., `attribute.environment`, `attribute.ref`, `attribute.job_workflow_ref`) for use in IAM conditions."
+}
+
+variable "enable_token_creator" {
+  type        = bool
+  default     = false
+  description = "Grants the GitHub Actions service account `roles/iam.serviceAccountTokenCreator` on itself, allowing workflows to mint short-lived OAuth access tokens or ID tokens via `iam.generateAccessToken` / `iam.generateIdToken` after federating."
+}
+
 variable "deploy_key" {
   type = map(object({
     read_only = bool
