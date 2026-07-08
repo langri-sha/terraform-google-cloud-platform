@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  TERRAFORM_VERSION: 1.9.8
+  TERRAFORM_VERSION: 1.15.8
 
 jobs:
   format:
