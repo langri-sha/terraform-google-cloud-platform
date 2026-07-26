@@ -10,7 +10,7 @@
     "type": "git",
     "url": "langri-sha/terraform-google-cloud-platform"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": {
     "name": "Filip Dupanović",
     "email": "filip.dupanovic@gmail.com",
