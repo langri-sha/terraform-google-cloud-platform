@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@langri-sha/prettier':
         specifier: ^0.4.0
-        version: 0.4.0(prettier@3.9.6)
+        version: 0.4.2(prettier@3.9.6)
       prettier:
         specifier: ^3.8.3
         version: 3.9.6
@@ -20,13 +20,10 @@ importers:
 
 packages:
 
-  '@langri-sha/prettier@0.4.0':
-    resolution: {integrity: sha512-arV4XrK6ZOrQN87iR39dd2B3oXuDTtlQPB2quR0r9S2PKIOy2oi1JT5SipuF3B04f94XDHSbiB3RBG1fXw5WVg==}
+  '@langri-sha/prettier@0.4.2':
+    resolution: {integrity: sha512-abuWKR1gkjuolxBvtC1teh/+wS+BcuXRAhSSO6416U9NsXGzn1L+I7q1+vXtERCK4/4E5Aygo5/pnxlpzE0MgQ==}
     peerDependencies:
       prettier: ^3.0.0
-
-  prettier-plugin-ini@1.2.0:
-    resolution: {integrity: sha512-8RR2n3AGlObQ11NCpyvv1N+xkTe/RdGp1vko8xeuXubWUa9NrOEZMX463H1AvnhnUX8b1NeJk3TKFkgvWunApg==}
 
   prettier-plugin-ini@1.3.0:
     resolution: {integrity: sha512-kX1KnPwITCTtYV0MTBZQKuFLxcNcbHOS9r7Ta1jHLLvRvZRTzHHqX0MEZMrCkedjLuxpQSgzr4aC5IRd+R3FPw==}
@@ -38,14 +35,10 @@ packages:
 
 snapshots:
 
-  '@langri-sha/prettier@0.4.0(prettier@3.9.6)':
+  '@langri-sha/prettier@0.4.2(prettier@3.9.6)':
     dependencies:
       prettier: 3.9.6
-      prettier-plugin-ini: 1.2.0
-
-  prettier-plugin-ini@1.2.0:
-    dependencies:
-      prettier: 3.9.6
+      prettier-plugin-ini: 1.3.0
 
   prettier-plugin-ini@1.3.0:
     dependencies:
