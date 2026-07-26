@@ -36,6 +36,26 @@ const project = new Project({
   editorConfig: {},
   lintSynthesized: {},
   prettier: {},
+  renovate: {
+    packageRules: [
+      {
+        description: 'Packages published from the langri-sha/projen monorepo',
+        groupName: 'langri-sha projen toolchain',
+        groupSlug: 'langri-sha-projen',
+        matchSourceUrls: ['https://github.com/langri-sha/projen'],
+      },
+    ],
+    customManagers: [
+      {
+        customType: 'regex',
+        datasourceTemplate: 'github-releases',
+        depNameTemplate: 'hashicorp/terraform',
+        extractVersionTemplate: '^v(?<version>.+)$',
+        managerFilePatterns: ['/^\\.github/workflows/terraform\\.yml$/'],
+        matchStrings: ['TERRAFORM_VERSION:\\s*(?<currentValue>\\S+)'],
+      },
+    ],
+  },
   typeScriptConfig: {},
   withTerraform: true,
 

@@ -32,5 +32,6 @@ node_modules/
 !/.prettierignore
 !/CODEOWNERS
 !/.editorconfig
+!/renovate.json5
 !/pnpm-workspace.yaml
 !/.projenrc.ts
