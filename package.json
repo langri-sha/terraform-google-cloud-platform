@@ -19,7 +19,8 @@
   },
   "type": "module",
   "scripts": {
-    "default": "npx projen default"
+    "default": "npx projen default",
+    "renovate": "npx projen renovate"
   },
   "devDependencies": {
     "@langri-sha/prettier": "^0.4.2",
