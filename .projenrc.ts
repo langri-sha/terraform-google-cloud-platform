@@ -19,7 +19,9 @@ const project = new Project({
     entrypoint: '',
     npmProvenance: false,
 
-    licensed: false,
+    copyrightYear: '2022',
+    license: 'MIT',
+    licensed: true,
 
     devDeps: [
       '@langri-sha/prettier@^0.4.2',
