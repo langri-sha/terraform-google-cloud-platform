@@ -46,6 +46,11 @@ const project = new Project({
         groupSlug: 'langri-sha-projen',
         matchSourceUrls: ['https://github.com/langri-sha/projen'],
       },
+      {
+        description: 'Install our own packages without waiting them out',
+        matchPackageNames: ['@langri-sha/**'],
+        minimumReleaseAge: null,
+      },
     ],
     customManagers: [
       {
@@ -80,26 +85,7 @@ new YamlFile(project, 'pnpm-workspace.yaml', {
       '@swc/core': false,
       esbuild: false,
     },
-    minimumReleaseAgeExclude: [
-      '@langri-sha/projen-babel@0.5.3',
-      '@langri-sha/projen-beachball@0.5.5',
-      '@langri-sha/projen-codeowners@0.5.5',
-      '@langri-sha/projen-editorconfig@0.6.5',
-      '@langri-sha/projen-eslint@0.3.6',
-      '@langri-sha/projen-husky@0.3.13',
-      '@langri-sha/projen-jest-config@0.4.6',
-      '@langri-sha/projen-license@0.3.8',
-      '@langri-sha/projen-lint-staged@0.3.7',
-      '@langri-sha/projen-lint-synthesized@0.5.7',
-      '@langri-sha/projen-pnpm-workspace@0.3.6',
-      '@langri-sha/projen-prettier@0.4.6',
-      '@langri-sha/projen-project@0.21.0',
-      '@langri-sha/projen-readme@0.1.5',
-      '@langri-sha/projen-renovate@0.4.10',
-      '@langri-sha/projen-swcrc@0.1.10',
-      '@langri-sha/projen-typescript-config@0.5.11',
-      '@langri-sha/tsconfig@1.0.0',
-    ],
+    minimumReleaseAgeExclude: ['@langri-sha/*'],
   },
 })
 
