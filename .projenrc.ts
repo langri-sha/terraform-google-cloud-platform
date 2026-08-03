@@ -78,7 +78,7 @@ const project = new Project({
 })
 
 project.package?.addEngine('pnpm', '>= 11.0.0')
-project.package?.addField('packageManager', 'pnpm@11.18.0')
+project.package?.addField('packageManager', 'pnpm@11.19.0')
 project.package?.addField('private', true)
 
 project.tryFindObjectFile('package.json')?.addDeletionOverride('pnpm')
