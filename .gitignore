@@ -33,6 +33,6 @@ node_modules/
 !/CODEOWNERS
 !/.editorconfig
 !/license
-!/renovate.json5
 !/pnpm-workspace.yaml
+!/renovate.json5
 !/.projenrc.ts

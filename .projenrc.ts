@@ -1,5 +1,4 @@
 import { Project } from '@langri-sha/projen-project'
-import { YamlFile } from 'projen'
 
 const project = new Project({
   name: 'terraform-google-cloud-platform',
@@ -37,6 +36,9 @@ const project = new Project({
   },
   editorConfig: {},
   lintSynthesized: {},
+  pnpmWorkspace: {
+    minimumReleaseAgeExclude: ['@langri-sha/*'],
+  },
   prettier: {},
   renovate: {
     packageRules: [
@@ -82,18 +84,5 @@ project.package?.addField('packageManager', 'pnpm@11.19.0')
 project.package?.addField('private', true)
 
 project.tryFindObjectFile('package.json')?.addDeletionOverride('pnpm')
-
-new YamlFile(project, 'pnpm-workspace.yaml', {
-  readonly: true,
-  marker: true,
-  obj: {
-    allowBuilds: {
-      '@swc/core': false,
-      esbuild: false,
-      'unrs-resolver': false,
-    },
-    minimumReleaseAgeExclude: ['@langri-sha/*'],
-  },
-})
 
 project.synth()
