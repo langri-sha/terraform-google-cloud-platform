@@ -90,6 +90,7 @@ new YamlFile(project, 'pnpm-workspace.yaml', {
     allowBuilds: {
       '@swc/core': false,
       esbuild: false,
+      'unrs-resolver': false,
     },
     minimumReleaseAgeExclude: ['@langri-sha/*'],
   },
