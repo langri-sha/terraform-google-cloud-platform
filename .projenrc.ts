@@ -25,7 +25,7 @@ const project = new Project({
     devDeps: [
       '@langri-sha/prettier@^0.4.2',
       'prettier-plugin-ini@^1.3.0',
-      'prettier@3.9.6',
+      'prettier@3.9.7',
     ],
     peerDependencyOptions: {
       pinnedDevDependency: false,
