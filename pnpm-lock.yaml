@@ -167,7 +167,7 @@ importers:
   .:
     devDependencies:
       '@langri-sha/prettier':
-        specifier: ^0.4.2
+        specifier: ^0.4.7
         version: 0.4.7(prettier@3.9.9)
       '@langri-sha/projen-project':
         specifier: ^0.31.2
@@ -178,9 +178,6 @@ importers:
       prettier:
         specifier: 3.9.9
         version: 3.9.9
-      prettier-plugin-ini:
-        specifier: ^1.3.0
-        version: 1.3.0
       projen:
         specifier: 0.86.5
         version: 0.86.5(constructs@10.8.1)
