@@ -13,6 +13,10 @@ resource "google_billing_account_iam_member" "terraform_service_account_billing_
   billing_account_id = var.billing_account
   role               = "roles/billing.user"
   member             = "serviceAccount:${google_service_account.terraform.email}"
+
+  # Changing a billing account's IAM policy takes an administrator, which the
+  # identity creating the workspace typically isn't.
+  provider = google.billing
 }
 
 resource "google_folder_iam_member" "terraform_service_account_workspace" {

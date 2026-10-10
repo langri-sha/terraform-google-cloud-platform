@@ -5,6 +5,8 @@ terraform {
     google = {
       source  = "hashicorp/google"
       version = "< 9"
+
+      configuration_aliases = [google.billing]
     }
   }
 }
