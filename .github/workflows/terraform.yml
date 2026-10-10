@@ -42,7 +42,16 @@ jobs:
       - name: List modules
         id: list
         run: |
-          modules=$(find modules -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | jq -R . | jq -s -c .)
+          modules=$(
+            find modules -mindepth 1 -maxdepth 1 -type d -printf '%f\n' |
+              while read -r module; do
+                directory="modules/$module"
+                [ -d "examples/$module" ] && directory="examples/$module"
+                echo "$module $directory"
+              done |
+              jq -R 'split(" ") | {module: .[0], directory: .[1]}' |
+              jq -s -c .
+          )
           echo "modules=$modules" >> "$GITHUB_OUTPUT"
 
   validate:
@@ -54,10 +63,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module: ${{ fromJson(needs.discover.outputs.modules) }}
+        include: ${{ fromJson(needs.discover.outputs.modules) }}
     defaults:
       run:
-        working-directory: modules/${{ matrix.module }}
+        working-directory: ${{ matrix.directory }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
