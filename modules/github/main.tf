@@ -1,5 +1,5 @@
 locals {
-  id = "${replace(replace(replace(data.github_repository.default.full_name, ".", "-"), "_", "-"), "/", "--")}-gha"
+  id = coalesce(var.account_id, "${replace(replace(replace(data.github_repository.default.full_name, ".", "-"), "_", "-"), "/", "--")}-gha")
 
   actions_variables = merge(var.actions_variables, {
     service_account            = google_service_account.github_actions.email
