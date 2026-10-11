@@ -1,3 +1,9 @@
+variable "account_id" {
+  type        = string
+  default     = null
+  description = "Account ID of the GitHub Actions service account. Defaults to one derived from the repository's full name, which runs over Google's 30-character limit for longer names."
+}
+
 variable "actions_variables" {
   default     = {}
   description = "Repository environment variables to set for GitHub Actions."
