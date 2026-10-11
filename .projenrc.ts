@@ -94,6 +94,7 @@ const project = new Project({
   },
   typeScriptConfig: {},
   withTerraform: true,
+  worktrunk: {},
 
   gitIgnoreOptions: {
     ignorePatterns: ['.terraform.lock.hcl'],
