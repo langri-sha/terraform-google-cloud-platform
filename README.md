@@ -34,5 +34,13 @@ Each release tag, `vX.Y.Z`, covers every module; the [releases] list them with
 their notes. A module's inputs are in its `variables.tf`, and the `github` and
 `secrets` modules have a README with a fuller example.
 
+## Contributing
+
+Run `terraform fmt -recursive` before opening a pull request; CI checks the
+formatting and validates every module. See [CONTRIBUTING.md] in
+`langri-sha/github`.
+
+[contributing.md]:
+  https://github.com/langri-sha/github/blob/main/CONTRIBUTING.md
 [releases]:
   https://github.com/langri-sha/terraform-google-cloud-platform/releases
