@@ -8,7 +8,7 @@ Actions] environment.
 
 ```hcl
 module "github" {
-  source = "git@github.com:langri-sha/terraform-google-cloud-platform\.git//modules/github"
+  source = "github.com/langri-sha/terraform-google-cloud-platform//modules/github?ref=vX.Y.Z"
 
   full_name = "langri-sha/langri-sha.com"
   project   = var.project
