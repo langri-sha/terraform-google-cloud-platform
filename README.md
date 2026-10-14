@@ -15,3 +15,24 @@ Google Cloud Platform.
 | [`secrets`](modules/secrets/)                             | Manages a set of secrets in Secret Manager.                                   |
 | [`terraform-admin`](modules/terraform-admin/)             | Bootstraps a project used for Terraform state and administration.             |
 | [`workspace`](modules/workspace/)                         | Configures a Google Workspace project.                                        |
+
+## Usage
+
+Source a module from this repository and pin it to a release tag:
+
+```hcl
+module "secrets" {
+  source = "github.com/langri-sha/terraform-google-cloud-platform//modules/secrets?ref=vX.Y.Z"
+
+  project = var.project_id
+  topic   = "cloudbuild"
+  secrets = ["api-token"]
+}
+```
+
+Each release tag, `vX.Y.Z`, covers every module; the [releases] list them with
+their notes. A module's inputs are in its `variables.tf`, and the `github` and
+`secrets` modules have a README with a fuller example.
+
+[releases]:
+  https://github.com/langri-sha/terraform-google-cloud-platform/releases
