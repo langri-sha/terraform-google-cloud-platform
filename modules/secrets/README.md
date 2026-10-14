@@ -20,7 +20,7 @@ for binary payloads. Keys in either map must match entries in `secrets`.
 
 ```hcl
 module "my_secrets" {
-  source = "../modules/secrets"
+  source = "github.com/langri-sha/terraform-google-cloud-platform//modules/secrets?ref=vX.Y.Z"
 
   project = var.project_id
   topic   = "cloudbuild"
