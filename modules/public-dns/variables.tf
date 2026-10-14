@@ -22,3 +22,9 @@ variable "site_verifications" {
   description = "Comma-separated list of DNS-based domain ownership verifications."
   type        = list(string)
 }
+
+variable "subdomain_verifications" {
+  description = "DNS-based domain ownership verifications that are asked for on a subdomain, keyed by that subdomain. Values carry their own surrounding quotes, as the apex verifications do."
+  type        = map(string)
+  default     = {}
+}
