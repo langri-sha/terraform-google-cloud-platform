@@ -26,6 +26,18 @@ resource "google_dns_record_set" "site_verifications" {
   type         = "TXT"
 }
 
+resource "google_dns_record_set" "subdomain_verifications" {
+  for_each = var.subdomain_verifications
+
+  name    = "${each.key}.${google_dns_managed_zone.public.dns_name}"
+  project = var.project_id
+
+  managed_zone = google_dns_managed_zone.public.name
+  rrdatas      = [each.value]
+  ttl          = 3600
+  type         = "TXT"
+}
+
 resource "google_project_iam_member" "service_account_dns_admin" {
   for_each = toset(var.dns_admins)
 
