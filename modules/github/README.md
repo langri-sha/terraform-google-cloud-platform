@@ -16,7 +16,7 @@ module "github" {
   environments = {
     production = {
       actions_variables = {
-        some_property = "serializiable"
+        some_property = "serializable"
       }
 
       actions_secrets = {
@@ -26,7 +26,7 @@ module "github" {
   }
 
   actions_variables = {
-    some_property = "serializiable"
+    some_property = "serializable"
   }
 
   actions_secrets = {
@@ -35,7 +35,7 @@ module "github" {
 
   deploy_key = {
     "my-org/other-repo" = {
-      read_only: true
+      read_only = true
     }
   }
 }
