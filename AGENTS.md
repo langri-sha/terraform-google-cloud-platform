@@ -16,7 +16,8 @@ Projen writes `package.json` and every file listed in `.projen/files.json`; they
 are read-only. Change them in `.projenrc.ts`, then run `pnpm exec projen`.
 Everything else — `modules/`, `examples/`, `README.md`, `.github/workflows/`,
 this file — is edited by hand. Repository settings, branch protection and the
-Actions secrets are managed by `langri-sha/github-repos`.
+Actions secrets are managed by Terraform outside this repository; don't change
+them in the GitHub UI.
 
 ## Common tasks
 
