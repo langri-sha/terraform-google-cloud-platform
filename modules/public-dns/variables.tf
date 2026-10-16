@@ -34,3 +34,9 @@ variable "zone_name" {
   type        = string
   default     = "public"
 }
+
+variable "dkim_keys" {
+  description = "DKIM public keys, keyed by selector and written to `<selector>._domainkey`. Values are the bare record text, without surrounding quotes; the module splits them into the 255-character strings a TXT record is made of."
+  type        = map(string)
+  default     = {}
+}
