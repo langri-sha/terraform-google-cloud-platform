@@ -80,3 +80,55 @@ run "a_dkim_key_over_255_characters_splits_into_quoted_strings" {
     error_message = "Each string of a TXT record is limited to 255 characters, so the key must be split there."
   }
 }
+
+run "no_spf_leaves_the_apex_text_records_as_they_were" {
+  command = plan
+
+  variables {
+    site_verifications = ["\"google-site-verification=abc\""]
+  }
+
+  assert {
+    condition     = toset(google_dns_record_set.site_verifications[0].rrdatas) == toset(["\"google-site-verification=abc\""])
+    error_message = "A consumer that sets no SPF must see no change to its apex records."
+  }
+}
+
+run "no_verifications_and_no_spf_declare_no_apex_text_records" {
+  command = plan
+
+  assert {
+    condition     = length(google_dns_record_set.site_verifications) == 0
+    error_message = "An empty apex must declare no TXT record set."
+  }
+}
+
+run "an_spf_policy_joins_the_site_verifications_in_one_record_set" {
+  command = plan
+
+  variables {
+    site_verifications = ["\"google-site-verification=abc\""]
+    spf                = "v=spf1 include:_spf.google.com ~all"
+  }
+
+  assert {
+    condition = toset(google_dns_record_set.site_verifications[0].rrdatas) == toset([
+      "\"google-site-verification=abc\"",
+      "\"v=spf1 include:_spf.google.com ~all\"",
+    ])
+    error_message = "Cloud DNS holds one TXT record set per name, so SPF must share the apex set with the verifications."
+  }
+}
+
+run "an_spf_policy_alone_still_declares_the_apex_record_set" {
+  command = plan
+
+  variables {
+    spf = "v=spf1 include:_spf.google.com ~all"
+  }
+
+  assert {
+    condition     = toset(google_dns_record_set.site_verifications[0].rrdatas) == toset(["\"v=spf1 include:_spf.google.com ~all\""])
+    error_message = "SPF without verifications must not need a verification to exist."
+  }
+}
