@@ -1,6 +1,6 @@
 resource "google_dns_managed_zone" "public" {
   dns_name = "${var.domain}."
-  name     = "public"
+  name     = var.zone_name
   project  = var.project_id
 }
 
