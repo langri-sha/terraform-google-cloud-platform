@@ -28,3 +28,9 @@ variable "subdomain_verifications" {
   type        = map(string)
   default     = {}
 }
+
+variable "zone_name" {
+  description = "Name of the managed zone. Names are unique within a project, so a second zone in the same project needs its own."
+  type        = string
+  default     = "public"
+}
