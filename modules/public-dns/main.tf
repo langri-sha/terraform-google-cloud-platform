@@ -14,14 +14,18 @@ resource "google_dns_record_set" "mx" {
   type         = "MX"
 }
 
+locals {
+  apex_txt = concat(var.site_verifications, var.spf == null ? [] : ["\"${var.spf}\""])
+}
+
 resource "google_dns_record_set" "site_verifications" {
-  count = length(var.site_verifications) > 0 ? 1 : 0
+  count = length(local.apex_txt) > 0 ? 1 : 0
 
   name    = google_dns_managed_zone.public.dns_name
   project = var.project_id
 
   managed_zone = google_dns_managed_zone.public.name
-  rrdatas      = var.site_verifications
+  rrdatas      = local.apex_txt
   ttl          = 300
   type         = "TXT"
 }

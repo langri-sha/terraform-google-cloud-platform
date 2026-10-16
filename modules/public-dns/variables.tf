@@ -40,3 +40,9 @@ variable "dkim_keys" {
   type        = map(string)
   default     = {}
 }
+
+variable "spf" {
+  description = "SPF policy for the apex, as the bare record text without surrounding quotes. A zone holds one TXT record set per name, so the module adds it to the one the site verifications are in."
+  type        = string
+  default     = null
+}
