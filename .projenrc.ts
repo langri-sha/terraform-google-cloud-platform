@@ -30,6 +30,7 @@ const project = new Project({
   codeowners: {
     '*': '@langri-sha',
   },
+  dagger: {},
   editorConfig: {},
   lintSynthesized: {},
   pnpmWorkspace: {
