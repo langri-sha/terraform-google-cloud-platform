@@ -132,3 +132,50 @@ run "an_spf_policy_alone_still_declares_the_apex_record_set" {
     error_message = "SPF without verifications must not need a verification to exist."
   }
 }
+
+run "no_dmarc_policy_declares_no_record" {
+  command = plan
+
+  assert {
+    condition     = length(google_dns_record_set.dmarc) == 0
+    error_message = "An unset policy must declare no record set."
+  }
+}
+
+run "a_dmarc_policy_lands_quoted_on_underscore_dmarc" {
+  command = plan
+
+  variables {
+    dmarc = "v=DMARC1; p=none; rua=mailto:dmarc-reports@example.com"
+  }
+
+  assert {
+    condition     = google_dns_record_set.dmarc[0].name == "_dmarc.example.com."
+    error_message = "The record must sit at _dmarc in the zone."
+  }
+
+  assert {
+    condition     = one(google_dns_record_set.dmarc[0].rrdatas) == "\"v=DMARC1; p=none; rua=mailto:dmarc-reports@example.com\""
+    error_message = "The policy must be one quoted string."
+  }
+}
+
+run "a_quoted_dmarc_policy_is_rejected_because_the_module_adds_the_quotes" {
+  command = plan
+
+  variables {
+    dmarc = "\"v=DMARC1; p=none\""
+  }
+
+  expect_failures = [var.dmarc]
+}
+
+run "a_value_that_is_not_a_dmarc_policy_is_rejected" {
+  command = plan
+
+  variables {
+    dmarc = "v=spf1 -all"
+  }
+
+  expect_failures = [var.dmarc]
+}

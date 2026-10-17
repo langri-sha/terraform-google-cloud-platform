@@ -46,3 +46,14 @@ variable "spf" {
   type        = string
   default     = null
 }
+
+variable "dmarc" {
+  description = "DMARC policy for the domain, as the bare record text without surrounding quotes, written to `_dmarc`."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.dmarc == null || (startswith(var.dmarc, "v=DMARC1;") && !can(regex("\"", var.dmarc)))
+    error_message = "The policy must be the bare DMARC record text, starting with v=DMARC1;; the module adds the quotes."
+  }
+}
