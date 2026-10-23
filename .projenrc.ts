@@ -27,6 +27,11 @@ const project = new Project({
       pinnedDevDependency: false,
     },
   },
+  claude: {
+    settings: {
+      attribution: { commit: '', pr: '', sessionUrl: false },
+    },
+  },
   codeowners: {
     '*': '@langri-sha',
   },
