@@ -11,7 +11,7 @@ const project = new Project({
       'https://github.com/langri-sha/terraform-google-cloud-platform/issues',
     homepage:
       'https://github.com/langri-sha/terraform-google-cloud-platform/#readme',
-    minNodeVersion: '24.16.0',
+    minNodeVersion: '24.22.1',
     repository: 'langri-sha/terraform-google-cloud-platform',
     type: 'module',
 
