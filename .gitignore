@@ -43,6 +43,7 @@ node_modules/
 !/.github/pull_request_template.md
 !/license
 !/pnpm-workspace.yaml
+!/.agents
 !/.config
 !/.config/wt.toml
 !/renovate.json5
