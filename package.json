@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "langri-sha/terraform-google-cloud-platform"
+    "url": "git+https://github.com/langri-sha/terraform-google-cloud-platform.git"
   },
   "license": "MIT",
   "author": {
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@langri-sha/prettier": "^0.4.7",
-    "@langri-sha/projen-project": "^0.43.0",
+    "@langri-sha/projen-project": "^0.44.2",
     "@langri-sha/tsconfig": "^1.0.0",
     "prettier": "3.9.9",
     "projen": "0.104.1",
