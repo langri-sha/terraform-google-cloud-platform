@@ -22,7 +22,6 @@ const project = new Project({
     license: 'MIT',
     licensed: true,
 
-    devDeps: ['@langri-sha/prettier@^0.4.7'],
     peerDependencyOptions: {
       pinnedDevDependency: false,
     },
