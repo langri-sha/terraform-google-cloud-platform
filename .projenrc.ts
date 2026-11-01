@@ -26,6 +26,9 @@ const project = new Project({
       pinnedDevDependency: false,
     },
   },
+  changesets: {
+    config: { privatePackages: { version: true, tag: true } },
+  },
   claude: {
     settings: {
       attribution: { commit: '', pr: '', sessionUrl: false },

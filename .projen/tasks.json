@@ -1,6 +1,15 @@
 {
   "manifestVersion": 3,
   "tasks": {
+    "changeset": {
+      "name": "changeset",
+      "description": "Add a Changesets change file",
+      "steps": [
+        {
+          "exec": "changeset"
+        }
+      ]
+    },
     "default": {
       "name": "default",
       "description": "Synthesize project files",

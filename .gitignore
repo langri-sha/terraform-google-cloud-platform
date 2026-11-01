@@ -31,6 +31,8 @@ node_modules/
 !/tsconfig.json
 !/prettier.config.js
 !/.prettierignore
+!/.changeset
+!/.changeset/config.json
 !/.claude
 /.claude/settings.local.json
 !/.claude/settings.json
