@@ -11,6 +11,9 @@ source = "dagger.io/js/prettier"
 packageManager = "pnpm"
 baseImageAddress = "node:24-slim"
 
+[modules.changesets]
+source = "github.com/langri-sha/dagger/changesets@v2.1.0"
+
 [modules.ci]
 source = "github.com/langri-sha/dagger/ci@v2.1.0"
 
