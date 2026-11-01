@@ -1,6 +1,11 @@
 {
   "dependencies": [
     {
+      "name": "@changesets/cli",
+      "version": "3.0.3",
+      "type": "build"
+    },
+    {
       "name": "@langri-sha/prettier",
       "version": "0.4.11",
       "type": "build"

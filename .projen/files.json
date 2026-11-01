@@ -1,5 +1,6 @@
 {
   "files": [
+    ".changeset/config.json",
     ".claude/settings.json",
     ".config/wt.toml",
     ".editorconfig",

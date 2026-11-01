@@ -3,4 +3,5 @@
 dist/
 !.projenrc.ts
 pnpm-lock.yaml
+CHANGELOG.md
 !.editorconfig

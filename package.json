@@ -19,6 +19,7 @@
   },
   "type": "module",
   "scripts": {
+    "changeset": "projen changeset",
     "default": "projen default",
     "renovate": "projen renovate",
     "skills": "projen skills",
@@ -26,6 +27,7 @@
     "worktrunk:show": "projen worktrunk:show"
   },
   "devDependencies": {
+    "@changesets/cli": "3.0.3",
     "@langri-sha/prettier": "0.4.11",
     "@langri-sha/projen-project": "^0.48.0",
     "@langri-sha/tsconfig": "^1.0.0",
