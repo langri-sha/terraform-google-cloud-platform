@@ -1,0 +1,11 @@
+name: Release
+
+on: workflow_dispatch
+
+jobs:
+  release:
+    permissions:
+      contents: read
+      id-token: write
+    uses: langri-sha/github/.github/workflows/packages.yml@v0.34.0
+    secrets: inherit

@@ -45,11 +45,20 @@ A Renovate regex manager in `.projenrc.ts` matches that exact
 
 CI (`workspace.yml` → `langri-sha/github` `check.yml`) also runs Prettier and
 `tsc --build`, and fails when synthesized files drift from `.projenrc.ts`. On
-Renovate pull requests it re-synthesizes and commits the result.
+Renovate pull requests it re-synthesizes and commits the result. The
+`changesets` checks of `dagger check` fail locally without the `.merge-base`
+that `langri-sha/github`'s `merge-base` action writes.
 
 ## Release
 
 One repo-wide semver tag, `vX.Y.Z`, on `main` covers every module; consumers pin
 `github.com/langri-sha/terraform-google-cloud-platform//modules/<module>?ref=vX.Y.Z`.
-Each tag gets a GitHub Release with generated notes:
-`gh release create vX.Y.Z --generate-notes`. Nothing tags on merge.
+
+Every pull request carries a change file, from `pnpm changeset`. Changes that
+release nothing, such as dependency and tooling updates, get an empty one
+(`pnpm exec changeset --empty`).
+
+A release is cut by dispatching the Release workflow: it consumes the change
+files, commits the version bump and changelog to `main`, tags `vX.Y.Z` and
+creates the GitHub Release. Nothing tags on merge. Never tag by hand: a stray
+tag makes `changeset tag` skip the version, so the release commit gets no tag.
