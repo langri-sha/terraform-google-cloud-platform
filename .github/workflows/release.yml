@@ -7,5 +7,5 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    uses: langri-sha/github/.github/workflows/packages.yml@v0.36.0
+    uses: langri-sha/github/.github/workflows/packages.yml@v0.37.0
     secrets: inherit
